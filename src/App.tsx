@@ -9,8 +9,15 @@ import Movie from 'routes/Movie';
 const GlobalStyles = createGlobalStyle`
     a {color: #fff; text-decoration: none; outline: none}
     a:hover, a:active {text-decoration: none; color:#fff;}
+
     body {
-        background-color: white;
+      background-color: white;
+    margin: 0;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+      'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+      sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
     }
     button {
       background : none;
