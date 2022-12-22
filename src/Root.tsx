@@ -1,17 +1,14 @@
 import React from 'react';
-import { BrowserRouter, Routes, Route} from 'react-router-dom';
-import Home from 'routes/Home';
-import Tv from 'routes/Tv';
-import Search from 'routes/Search';
+import {Outlet} from 'react-router-dom';
 import Header from 'components/Header';
 import { createGlobalStyle } from 'styled-components';
-import Movie from 'routes/Movie';
 const GlobalStyles = createGlobalStyle`
     a {color: #fff; text-decoration: none; outline: none}
     a:hover, a:active {text-decoration: none; color:#fff;}
 
     body {
-      background-color: white;
+    background-color: ${props => props.theme.black.darker};
+    color: ${props => props.theme.white.darker};
     margin: 0;
     font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
       'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
@@ -33,15 +30,8 @@ const GlobalStyles = createGlobalStyle`
 function App() {
   return <>
     <GlobalStyles/>
-    <BrowserRouter>
       <Header/>
-      <Routes>
-        <Route path="/" element={<Home/>}></Route>
-        <Route path="/tv" element={<Tv/>}></Route>
-        <Route path="/movie" element={<Movie/>}></Route>
-        <Route path="/search" element={<Search/>}></Route>
-      </Routes>
-    </BrowserRouter>
+      <Outlet/>
   </>
 }
 
