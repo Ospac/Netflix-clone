@@ -10,6 +10,7 @@ export default function Header () {
     const homeRouteMatch = useMatch("/");
     const tvRouteMatch = useMatch("/tv");
     const movieRouteMatch = useMatch("/movie");
+    const moviesInfoMatch = useMatch("/movies/:movieId");
 
     const [isSearchOpen, setSearchOpen] = useState(false);
     const inputAnimation = useAnimation();
@@ -58,7 +59,7 @@ export default function Header () {
                 </Logo>
             </Link>
             <Items>
-                <Item><Link to=''>홈</Link> {homeRouteMatch && <Circle layoutId="circle"/>}</Item>
+                <Item><Link to=''>홈</Link> {(homeRouteMatch || moviesInfoMatch) && <Circle layoutId="circle"/>}</Item>
                 <Item><Link to='tv'>시리즈</Link>{tvRouteMatch && <Circle layoutId="circle"/>}</Item>
                 <Item><Link to='movie'>영화</Link> {movieRouteMatch && <Circle layoutId="circle"/>}</Item>
             </Items>

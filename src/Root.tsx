@@ -16,6 +16,9 @@ const GlobalStyles = createGlobalStyle`
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     }
+    h1,h2,h3,h4{
+      margin: 0;
+    }
     button {
       background : none;
       border : 0;
