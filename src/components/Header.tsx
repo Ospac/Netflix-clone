@@ -1,17 +1,23 @@
 import styled from "styled-components";
 import profile from "src_assets/profile.png"
 import { motion, useAnimation, useScroll, Variants } from 'framer-motion'
-import { Link, useMatch } from "react-router-dom";
+import { Link, useMatch, useNavigate } from "react-router-dom";
 import { IoSearch } from "react-icons/io5";
 import { useState } from "react";
 import { useEffect } from "react";
+import { useForm } from "react-hook-form";
 
 export default function Header () {
     const homeRouteMatch = useMatch("/");
     const tvRouteMatch = useMatch("/tv");
     const movieRouteMatch = useMatch("/movie");
     const moviesInfoMatch = useMatch("/movies/:movieId");
+    const navigate = useNavigate();
 
+    const { register, handleSubmit} = useForm<IForm>();
+    const onValid = (data : IForm) => {
+        navigate(`/search?keyword=${data.keyword}`);
+    };
     const [isSearchOpen, setSearchOpen] = useState(false);
     const inputAnimation = useAnimation();
     const searchBtnAnimation = useAnimation();
@@ -65,15 +71,16 @@ export default function Header () {
             </Items>
         </Col>
         <Col>
-            <Search>
+            <Search onSubmit={handleSubmit(onValid)}>
                 <SearchBtn 
                     onClick={toggleSearchInput}
                     animate={searchBtnAnimation}
                     transition={{ease: 'linear'}}   
                     >
-                        <IoSearch/>
+                    <IoSearch/>
                 </SearchBtn>
                 <Input
+                    {...register("keyword", { required: true, minLength: 2})}
                     initial={{scaleX : 0}}
                     animate={inputAnimation}
                     transition={{ease: 'linear'}} 
@@ -82,6 +89,9 @@ export default function Header () {
             <Profile/>
         </Col>
     </Nav>)
+}
+interface IForm{
+    keyword : string;
 }
 const logoVariants : Variants = {
     normal : {
@@ -147,7 +157,7 @@ const Circle = styled(motion.span)`
     margin: 0 auto;
     bottom: -6px;
 `;
-const Search = styled.span`
+const Search = styled.form`
     position: relative;
     display: flex;
     align-items: center;

@@ -29,3 +29,6 @@ export interface INowPlayingMovieResult{
 export const fetchNowPlayingMovie = () => {
     return fetch(`${BASE_URL}movie/now_playing?api_key=${API_KEY}&language=ko&page=1`).then((res)=> res.json());
 }
+export const fetchSearch = () => {
+    
+}
